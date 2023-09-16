@@ -572,7 +572,7 @@ class NougatModel(PreTrainedModel):
         if image_tensors is None:
             image_tensors = self.encoder.prepare_input(image).unsqueeze(0)
         image_tensors = image_tensors.to(torch.bfloat16)
-        if self.device.type == "cuda":
+        if self.device.type == "cuda" or self.device.type == "mps":
             image_tensors = image_tensors.to(self.device)
         last_hidden_state = self.encoder(image_tensors)
 

@@ -28,6 +28,8 @@ if torch.cuda.is_available():
     )
     if BATCH_SIZE == 0:
         logging.warning("GPU VRAM is too small. Computing on CPU.")
+elif torch.backends.mps.is_available():
+    BATCH_SIZE = 32
 else:
     # don't know what a good value is here. Would not recommend to run on CPU
     BATCH_SIZE = 1
